@@ -130,7 +130,5 @@ class ColorInputButton extends StatelessWidget {
 void fetchColor(BuildContext context) {
   final corCubit = context.bloc<CorCubit>();
   corCubit.getCor(
-      Provider
-          .of<UserPreferenceModel>(context, listen: false)
-          .getAccuracyMode);
+      Provider.of<UserPreferenceModel>(context, listen: false).getAccuracyMode);
 }
