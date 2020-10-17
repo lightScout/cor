@@ -1,7 +1,10 @@
 import 'package:cor/cubit/cor_cubit.dart';
 import 'package:cor/model/color.dart';
+import 'package:cor/model/user_preference_model.dart';
+import 'package:cor/pages/setting_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 class ColorPickPage extends StatefulWidget {
   @override
@@ -17,6 +20,27 @@ class _ColorPickPageState extends State<ColorPickPage> {
         title: Text(
           "Color Search",
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 22.2),
+            child: GestureDetector(
+              child: Icon(Icons.settings),
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  builder: (context) => SingleChildScrollView(
+                      child: Container(
+                    child: SettingsPage(),
+                    padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom),
+                  )),
+                  backgroundColor: Colors.transparent,
+                );
+              },
+            ),
+          )
+        ],
       ),
       body: Container(
         color: Colors.black,
@@ -105,5 +129,8 @@ class ColorInputButton extends StatelessWidget {
 
 void fetchColor(BuildContext context) {
   final corCubit = context.bloc<CorCubit>();
-  corCubit.getCor();
+  corCubit.getCor(
+      Provider
+          .of<UserPreferenceModel>(context, listen: false)
+          .getAccuracyMode);
 }

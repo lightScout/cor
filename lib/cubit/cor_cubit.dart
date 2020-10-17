@@ -11,10 +11,10 @@ class CorCubit extends Cubit<CorState> {
 
   CorCubit(this._colorRepository) : super(CorInitial());
 
-  Future<void> getCor() async {
+  Future<void> getCor(bool a) async {
     try {
       emit(CorLoading());
-      final cor = await _colorRepository.fetchColor();
+      final cor = await _colorRepository.fetchColor(a);
       emit(CorLoaded(cor));
     } on NetworkException {
       emit(CorError('Wait a sec, remember to take a breath to activate Cor'));

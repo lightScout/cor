@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 
 abstract class ColorRepository {
   /// Throws [NetworkException].
-  Future<Cor> fetchColor();
+  Future<Cor> fetchColor(bool accuracyMode);
 }
 
 class FakeColorRepository implements ColorRepository {
   @override
-  Future<Cor> fetchColor() {
+  Future<Cor> fetchColor(bool accuracyMode) {
     // Simulate network delay
     return Future.delayed(
       Duration(seconds: 1),
@@ -26,8 +26,10 @@ class FakeColorRepository implements ColorRepository {
         );
 
         //Simulate some network exception
-        if (_random.nextBool()) {
-          throw NetworkException();
+        if (!accuracyMode) {
+          if (_random.nextBool()) {
+            throw NetworkException();
+          }
         }
 
         // Return "fetched" Color
