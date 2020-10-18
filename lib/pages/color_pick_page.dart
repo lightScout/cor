@@ -121,7 +121,7 @@ class ColorInputButton extends StatelessWidget {
         valueListenable: Hive.box('settings').listenable(),
         builder: (context, box, widget) {
           return MaterialButton(
-            color: Colors.red,
+            color: Colors.redAccent,
             onPressed: () {
               fetchColor(context, box.get('accuracyMode', defaultValue: false));
               print(box.get('accuracyMode', defaultValue: false));
