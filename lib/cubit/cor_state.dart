@@ -22,9 +22,9 @@ class CorLoading extends CorState {
 }
 
 class CorLoaded extends CorState {
-  final Cor cor;
+  final HashMap map;
 
-  const CorLoaded(this.cor);
+  const CorLoaded(this.map);
 
   @override
   // TODO: implement props
