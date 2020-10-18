@@ -1,10 +1,10 @@
 import 'package:cor/cubit/cor_cubit.dart';
 import 'package:cor/model/color.dart';
-import 'package:cor/model/user_preference_model.dart';
 import 'package:cor/pages/setting_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class ColorPickPage extends StatefulWidget {
   @override
@@ -117,18 +117,24 @@ class _ColorPickPageState extends State<ColorPickPage> {
 class ColorInputButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
-      color: Colors.red,
-      onPressed: () => fetchColor(context),
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50.0),
-          side: BorderSide(color: Colors.deepOrange)),
-    );
+    return ValueListenableBuilder(
+        valueListenable: Hive.box('settings').listenable(),
+        builder: (context, box, widget) {
+          return MaterialButton(
+            color: Colors.red,
+            onPressed: () {
+              fetchColor(context, box.get('accuracyMode', defaultValue: false));
+              print(box.get('accuracyMode', defaultValue: false));
+            },
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50.0),
+                side: BorderSide(color: Colors.deepOrange)),
+          );
+        });
   }
 }
 
-void fetchColor(BuildContext context) {
+void fetchColor(BuildContext context, bool accuracy) {
   final corCubit = context.bloc<CorCubit>();
-  corCubit.getCor(
-      Provider.of<UserPreferenceModel>(context, listen: false).getAccuracyMode);
+  corCubit.getCor(accuracy);
 }

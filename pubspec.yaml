@@ -26,8 +26,6 @@ dependencies:
   bloc: ^6.0.1
   flutter_bloc: ^6.0.1
   equatable: ^0.6.0
-  lite_rolling_switch: ^0.1.1
-  shared_preferences: ^0.4.1
   hive: ^1.4.4+1
   hive_flutter: ^0.3.1
   path_provider: ^1.6.11
