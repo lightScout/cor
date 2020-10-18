@@ -1,8 +1,6 @@
 import 'dart:collection';
 
 import 'package:cor/cubit/cor_cubit.dart';
-import 'package:cor/data/color_data.dart';
-import 'package:cor/model/color.dart';
 import 'package:cor/pages/setting_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,10 +32,10 @@ class _ColorPickPageState extends State<ColorPickPage> {
                   isScrollControlled: true,
                   builder: (context) => SingleChildScrollView(
                       child: Container(
-                        child: SettingsPage(),
-                        padding: EdgeInsets.only(
-                            bottom: MediaQuery.of(context).viewInsets.bottom),
-                      )),
+                    child: SettingsPage(),
+                    padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom),
+                  )),
                   backgroundColor: Colors.transparent,
                 );
               },
